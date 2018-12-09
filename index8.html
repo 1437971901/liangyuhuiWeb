@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>我的第八次作业</title>
+<style type="text/css">
+#box{width: 800px;margin: 30px auto;}
+table{width: 500px;border: 1px solid gray;border-collapse: collapse;margin-top: 30px;background-color: lemonchiffon;}
+table th,table td{line-height: 30px;text-align: center;border: 1px solid gray;}
+</style>
+</head>
+<body>
+<div id="box">
+<label for="" backg>编号：</label><input type="text" name="" id="txt-name">
+<label for="">姓名：</label><input type="text" name="" id="txt-age">
+<label for="">性别：</label><input type="text" name="" id="txt-sex">
+<button id="btnAdd">操作</button>
+<script type="text/javascript">
+var o=document.getElementById('box');
+var oName=document.getElementById('txt-name');
+var oAge=document.getElementById('txt-age');
+var oAddress=document.getElementById('txt-sex');
+var tab=document.createElement('table');
+var cap=document.createElement('caption');
+cap.innerHTML='湘潭大学人口普查调查问卷';
+tab.appendChild(cap);
+var headTr=createTr('编号','姓名','年龄',true);
+tab.appendChild(headTr);
+document.getElementById('btnAdd').onclick=function(){
+var pName=oName.value;
+var pAge=oAge.value;
+var pAddress=oAddress.value;
+if(pName==''||pAge==''||pAddress==''){
+alert('姓名、年龄、编号均不能为空');
+return;
+}
+var tr=createTr(pName,pAge,pAddress,false);
+tab.appendChild(tr);
+o.appendChild(tab);
+oName.value='';
+oAddress.value='';
+oAge.value='';
+};
+function createTr(ct1,ct2,ct3,isTh){
+var tr=document.createElement('tr');
+var td1=createTd(ct1,isTh);
+var td2=createTd(ct2,isTh);
+var td3=createTd(ct3,isTh);
+var td4=document.createElement('td');
+if(!isTh){
+var _link=document.createElement('a');
+_link.href='#';
+_link.innerHTML='删除';
+td4.appendChild(_link);
+td4.onclick=function(){
+if(confirm('确认删除？')){
+this.parentNode.parentNode.removeChild(this.parentNode);
+}
+};
+}else{
+td4.innerHTML='操作';
+}
+tr.appendChild(td1);
+tr.appendChild(td2);
+tr.appendChild(td3);
+tr.appendChild(td4);
+return tr;
+}
+function createTd(content,isTh){
+var td;
+if(isTh){
+td=document.createElement('th');
+}else{
+td=document.createElement('td');
+}
+td.innerHTML=content;
+return td;
+}
+</script>
+</div>
+</body>
+</html>
